@@ -3,14 +3,16 @@
 // from https://www.blockscad3d.com/community/projects/718412
 
 module hole_for_switch() {
+  translate([0,-y2/2,0])
   rotate([270, 0, 0]){
-    cylinder(r1=switch_dia, r2=switch_dia, h=y2, center=false);
+      cylinder(r1=switch_dia, r2=switch_dia, h=y2*2, center=false);
   }
 }
 
 module hole_for_potentiometer() {
+  translate([0,-y2/2,0])
   rotate([270, 0, 0]){
-    cylinder(r1=pot_dia, r2=pot_dia, h=y2, center=false);
+    cylinder(r1=pot_dia, r2=pot_dia, h=y2*2, center=false);
   }
 }
 
@@ -46,8 +48,9 @@ module make_face_plate() {
 }
 
 module hole_for_jack() {
+  translate([0,-y2/2,0])
   rotate([270, 0, 0]){
-    cylinder(r1=jack_dia, r2=jack_dia, h=y2, center=false);
+    cylinder(r1=jack_dia, r2=jack_dia, h=y2*2, center=false);
   }
 }
 
@@ -90,20 +93,33 @@ module display_and_buttons() {
 }
 
 module make_slot() {
+  translate([0,-y2/2,0])
   union(){
     translate([x5, 0, 0]){
       rotate([270, 0, 0]){
-        cylinder(r1=(z3 / 2), r2=(z3 / 2), h=y2, center=false);
+        cylinder(r1=(z3 / 2), r2=(z3 / 2), h=y2*2, center=false);
       }
     }
     translate([x4, 0, 0]){
       rotate([270, 0, 0]){
-        cylinder(r1=(z3 / 2), r2=(z3 / 2), h=y2, center=false);
+        cylinder(r1=(z3 / 2), r2=(z3 / 2), h=y2*2, center=false);
       }
       translate([0, 0, ((z3 / 2) * -1)]){
-        cube([(x5 - x4), y2, z3], center=false);
+        cube([(x5 - x4), y2*2, z3], center=false);
       }
     }
+  }
+}
+
+module left_stiffening_rib() {
+  translate([x2, 0, ((z1 - z2) / 2)]){
+    cube([x3, y1, z2], center=false);
+  }
+}
+
+module right_stiffening_rib() {
+  translate([((x1 - x3) - x2), 0, ((z1 - z2) / 2)]){
+    cube([x3, y1, z2], center=false);
   }
 }
 
@@ -126,15 +142,13 @@ z2 = 110.5; // length of the stiffening ribs (vertical distance)
 z3 = 3;   // radius of mounting slots
 z4 = 3;   // distance to center of radius/slot from lower edge of front plate
 union(){
-  translate([x2, 0, ((z1 - z2) / 2)]){
-    cube([x3, y1, z2], center=false);
-  }
-  translate([((x1 - x3) - x2), 0, ((z1 - z2) / 2)]){
-    cube([x3, y1, z2], center=false);
-  }
+  left_stiffening_rib();
+  right_stiffening_rib();
+  
   difference() {
     make_face_plate();
 
+    // add a second set of mounting slots if larger than 10hp
     if (Width_HP <= 10) {
       make_slot_pair();
     } else {
@@ -143,6 +157,6 @@ union(){
         make_slot_pair();
       }
     }
-
+    echo("Final panel width: ", x1);
   }
 }
