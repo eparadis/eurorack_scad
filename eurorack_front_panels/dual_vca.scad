@@ -25,10 +25,18 @@ module make_face_plate() {
   difference() {
     cube([x1, y2, z1], center=false);
 
-    union(){
-    //   translate([15, 0, (20 + 0 * 17.78)]){
-    //     hole_for_jack();
-    //   }
+    union() {
+        for (i=[0:5]) {
+            translate([x1/2, 0, (15 + i * 12)]){
+                hole_for_jack();
+            }
+        }
+        for (i=[0:1]) {
+            translate([x1/2, 0, (90 + i * 15)]){
+                hole_for_potentiometer();
+            }
+        }
+      
     //   translate([15, 0, (20 + 1 * 17.78)]){
     //     hole_for_jack();
     //   }
@@ -114,7 +122,7 @@ module panel_label(label) {
     text(label, 5, "Krungthep", halign="center" );
 }
 
-Width_HP = 6;
+Width_HP = 4;
 jack_dia = 5.8;
 pot_dia = 6.8;  // knob dia is 12.9
 switch_dia = 4.75;
@@ -127,7 +135,7 @@ $fs = 0.1;
 // these will likely stay the same one dialed in
 x1 = Width_HP * 5.08 - 0.3; // width of the front plate
 x2 = 2.9; // inset of the stiffening ribs behind the front plate from the edges
-x3 = 3;   // width of the stiffening ribs
+x3 = 2;   // width of the stiffening ribs
 x4 = 7.3; // distance to center of left-hand radius of mounting slot
 x5 = 9.9; // distance to center of right-hand radius of mounting slot
 y1 = 8;  // height of stiffening ribs (distance they extend back into the rack)
