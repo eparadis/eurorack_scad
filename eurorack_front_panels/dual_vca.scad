@@ -1,7 +1,5 @@
 //!OpenSCAD
 
-// from https://www.blockscad3d.com/community/projects/718412
-
 module hole_for_switch() {
   hole_in_front_plate(switch_dia);
 }
@@ -36,25 +34,6 @@ module make_face_plate() {
                 hole_for_potentiometer();
             }
         }
-      
-    //   translate([15, 0, (20 + 1 * 17.78)]){
-    //     hole_for_jack();
-    //   }
-    //   translate([15, 0, (20 + 2 * 17.78)]){
-    //     hole_for_jack();
-    //   }
-    //   translate([(15 + 17.78), 0, (20 + 0 * 17.78)]){
-    //     hole_for_jack();
-    //   }
-    //   translate([(15 + 17.78), 0, (20 + 1 * 17.78)]){
-    //     hole_for_potentiometer();
-    //   }
-    //   translate([(15 + 17.78), 0, (20 + 2 * 17.78)]){
-    //     hole_for_potentiometer();
-    //   }
-    //   translate([(15 + 17.78), 0, (20 + 3 * 17.78)]){
-    //     hole_for_potentiometer();
-    //   }
     }
   }
 }
