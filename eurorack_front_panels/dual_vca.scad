@@ -115,11 +115,19 @@ module right_stiffening_rib() {
 }
 
 module panel_label(label) {
-  translate([x1/2,0,112])
+  translate([x1/2,0,116])
   translate([0,text_depth,0])
   rotate([90, 0, 0])
   linear_extrude(height=3)
     text(label, 5, "Krungthep", halign="center" );
+}
+
+module control_label(label, x, z) {
+    translate([x,0,z])
+    translate([0,text_depth,0])
+    rotate([90, 0, 0])
+    linear_extrude(height=3)
+        text(label, 2, "Krungthep", halign="center", valign="center" );
 }
 
 Width_HP = 4;
@@ -168,4 +176,14 @@ difference() {
   echo("Final panel width: ", x1);
 
   panel_label("2VCA");
+
+  control_label("OUT2", 3.5, 15 + 0 * 12);
+  control_label("IN2", 4, 15 + 1 * 12);
+  control_label("CV2", 4, 15 + 2 * 12);
+  control_label("OUT1", 3.5, 15 + 3 * 12);
+  control_label("IN1", 4, 15 + 4 * 12);
+  control_label("CV1", 4, 15 + 5 * 12);
+
+  control_label("CV2", 3, 90 + 0 * 15);
+  control_label("CV1", 3, 90 + 1 * 15);
 }
