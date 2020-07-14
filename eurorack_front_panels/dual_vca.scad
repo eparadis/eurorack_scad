@@ -1,5 +1,16 @@
 //!OpenSCAD
 
+/* Description
+This is a front panel for a Dual VCA eurorack module.
+
+Each VCA has four jacks (input, output, CV) and a potentiometer to scale the
+input CV.
+
+This design has the six jacks at the bottom and the four potentiometers at 
+the top.
+
+Labels are inset into the face to be filled in with paint or marker.
+*/
 module hole_for_switch() {
   hole_in_front_plate(switch_dia);
 }
