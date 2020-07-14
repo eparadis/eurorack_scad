@@ -3,16 +3,21 @@
 // from https://www.blockscad3d.com/community/projects/718412
 
 module hole_for_switch() {
-  translate([0,-y2/2,0])
-  rotate([270, 0, 0]){
-      cylinder(r1=switch_dia, r2=switch_dia, h=y2*2, center=false);
-  }
+  hole_in_front_plate(switch_dia);
 }
 
 module hole_for_potentiometer() {
+  hole_in_front_plate(pot_dia);
+}
+
+module hole_for_jack() {
+  hole_in_front_plate(jack_dia);
+}
+
+module hole_in_front_plate(diameter) {
   translate([0,-y2/2,0])
   rotate([270, 0, 0]){
-    cylinder(r1=pot_dia, r2=pot_dia, h=y2*2, center=false);
+    cylinder(r1=diameter/2, r2=diameter/2, h=y2*2, center=false);
   }
 }
 
@@ -44,13 +49,6 @@ module make_face_plate() {
       }
       display_and_buttons();
     }
-  }
-}
-
-module hole_for_jack() {
-  translate([0,-y2/2,0])
-  rotate([270, 0, 0]){
-    cylinder(r1=jack_dia, r2=jack_dia, h=y2*2, center=false);
   }
 }
 
