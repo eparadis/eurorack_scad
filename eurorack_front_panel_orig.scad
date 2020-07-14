@@ -111,17 +111,20 @@ Width_HP = 10;
 jack_dia = 5.83;
 pot_dia = 6.81;
 switch_dia = 4.75;
-x1 = Width_HP * 5.08 - 0.3;
-x2 = 2.9;
-x3 = 3;
-x4 = 7.3;
-x5 = 9.9;
-y1 = 16;
-y2 = 3;
-z1 = 128.5;
-z2 = 110.5;
-z3 = 3;
-z4 = 3;
+
+// panel dimensions
+// these will likely stay the same one dialed in
+x1 = Width_HP * 5.08 - 0.3; // width of the front plate
+x2 = 2.9; // inset of the stiffening ribs behind the front plate from the edges
+x3 = 3;   // width of the stiffening ribs
+x4 = 7.3; // distance to center of left-hand radius of mounting slot
+x5 = 9.9; // distance to center of right-hand radius of mounting slot
+y1 = 16;  // height of stiffening ribs (distance they extend back into the rack)
+y2 = 3;   // thickness of front plate
+z1 = 128.5; // height of the plate
+z2 = 110.5; // length of the stiffening ribs (vertical distance)
+z3 = 3;   // radius of mounting slots
+z4 = 3;   // distance to center of radius/slot from lower edge of front plate
 union(){
   translate([x2, 0, ((z1 - z2) / 2)]){
     cube([x3, y1, z2], center=false);
