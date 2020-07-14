@@ -121,10 +121,22 @@ module right_stiffening_rib() {
   }
 }
 
+module panel_label(label) {
+  translate([x1/2,0,112])
+  translate([0,text_depth,0])
+  rotate([90, 0, 0])
+  linear_extrude(height=3)
+    text(label, 6, "Krungthep", halign="center" );
+}
+
 Width_HP = 10;
 jack_dia = 5.83;
 pot_dia = 6.81;
 switch_dia = 4.75;
+text_depth = 1;
+
+// make round shapes more fine
+$fs = 0.1;
 
 // panel dimensions
 // these will likely stay the same one dialed in
@@ -139,22 +151,25 @@ z1 = 128.5; // height of the plate
 z2 = 110.5; // length of the stiffening ribs (vertical distance)
 z3 = 3;   // radius of mounting slots
 z4 = 3;   // distance to center of radius/slot from lower edge of front plate
-union(){
-  left_stiffening_rib();
-  right_stiffening_rib();
-  
-  difference() {
+difference() {
+  // all the positive stuff
+  union() {
     make_face_plate();
-
-    // add a second set of mounting slots if larger than 10hp
-    if (Width_HP <= 10) {
-      make_slot_pair();
-    } else {
-      union(){
-        make_right_slot_pair();
-        make_slot_pair();
-      }
-    }
-    echo("Final panel width: ", x1);
+    left_stiffening_rib();
+    right_stiffening_rib();
   }
+
+  // cutouts
+  // add a second set of mounting slots if larger than 10hp
+  if (Width_HP <= 10) {
+    make_slot_pair();
+  } else {
+    union(){
+      make_right_slot_pair();
+      make_slot_pair();
+    }
+  }
+  echo("Final panel width: ", x1);
+
+  panel_label("BeepBoop");
 }
