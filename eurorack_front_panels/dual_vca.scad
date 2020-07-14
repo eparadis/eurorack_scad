@@ -114,9 +114,9 @@ module panel_label(label) {
     text(label, 5, "Krungthep", halign="center" );
 }
 
-Width_HP = 4;
-jack_dia = 5.83;
-pot_dia = 6.81;
+Width_HP = 6;
+jack_dia = 5.8;
+pot_dia = 6.8;  // knob dia is 12.9
 switch_dia = 4.75;
 text_depth = 1;
 
@@ -130,8 +130,8 @@ x2 = 2.9; // inset of the stiffening ribs behind the front plate from the edges
 x3 = 3;   // width of the stiffening ribs
 x4 = 7.3; // distance to center of left-hand radius of mounting slot
 x5 = 9.9; // distance to center of right-hand radius of mounting slot
-y1 = 16;  // height of stiffening ribs (distance they extend back into the rack)
-y2 = 3;   // thickness of front plate
+y1 = 8;  // height of stiffening ribs (distance they extend back into the rack)
+y2 = 2;   // thickness of front plate
 z1 = 128.5; // height of the plate
 z2 = 110.5; // length of the stiffening ribs (vertical distance)
 z3 = 3;   // radius of mounting slots
@@ -144,6 +144,7 @@ difference() {
         right_stiffening_rib();
     }
     left_stiffening_rib();
+    right_stiffening_rib();
   }
 
   // cutouts
