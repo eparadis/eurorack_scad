@@ -1,12 +1,6 @@
 
 //!OpenSCAD
 
-module make_face_plate() {
-  difference() {
-    cube([x1, y2, z1], center=false);
-  }
-}
-
 Width_HP = 12;
 
 include <front_panel_common.scad>
