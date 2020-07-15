@@ -15,14 +15,6 @@ Labels are inset into the face to be filled in with paint or marker.
 // 'include' instead of 'use' in order to properly compute various dimensions
 include <vca_common.scad>;
 
-module make_face_plate() {
-  difference() {
-    cube([x1, y2, z1], center=false);
-    single_vca_cutouts(15);
-    single_vca_cutouts(69);
-  }
-}
-
 module single_vca_cutouts(offset) {
     union() {
         for (i=[0:2]) {
@@ -38,14 +30,10 @@ module single_vca_cutouts(offset) {
 
 difference() {
   // all the positive stuff
-  union() {
-    make_face_plate();
-    if (Width_HP > 10) {
-        right_stiffening_rib();
-    }
-    left_stiffening_rib();
-    right_stiffening_rib();
-  }
+  make_face_plate();
+
+  single_vca_cutouts(15);
+  single_vca_cutouts(69);
 
   // cutouts
   // add a second set of mounting slots if larger than 10hp

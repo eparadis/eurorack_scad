@@ -13,12 +13,7 @@ include <front_panel_common.scad>
 
 difference() {
   // all the positive stuff
-  union() {
-    make_face_plate();
-    left_stiffening_rib();
-    if( Width_HP >= 8 )
-        right_stiffening_rib();
-  }
+  make_face_plate();
 
   // cutouts
   // add a second set of mounting slots if larger than 10hp

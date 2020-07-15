@@ -2,34 +2,30 @@
 
 // from https://www.blockscad3d.com/community/projects/718412
 
-module make_face_plate() {
-  difference() {
-    cube([x1, y2, z1], center=false);
-
-    union(){
-      translate([15, 0, (20 + 0 * 17.78)]){
-        hole_for_jack();
-      }
-      translate([15, 0, (20 + 1 * 17.78)]){
-        hole_for_jack();
-      }
-      translate([15, 0, (20 + 2 * 17.78)]){
-        hole_for_jack();
-      }
-      translate([(15 + 17.78), 0, (20 + 0 * 17.78)]){
-        hole_for_jack();
-      }
-      translate([(15 + 17.78), 0, (20 + 1 * 17.78)]){
-        hole_for_potentiometer();
-      }
-      translate([(15 + 17.78), 0, (20 + 2 * 17.78)]){
-        hole_for_potentiometer();
-      }
-      translate([(15 + 17.78), 0, (20 + 3 * 17.78)]){
-        hole_for_potentiometer();
-      }
-      display_and_buttons();
+module cutouts() {
+  union(){
+    translate([15, 0, (20 + 0 * 17.78)]){
+      hole_for_jack();
     }
+    translate([15, 0, (20 + 1 * 17.78)]){
+      hole_for_jack();
+    }
+    translate([15, 0, (20 + 2 * 17.78)]){
+      hole_for_jack();
+    }
+    translate([(15 + 17.78), 0, (20 + 0 * 17.78)]){
+      hole_for_jack();
+    }
+    translate([(15 + 17.78), 0, (20 + 1 * 17.78)]){
+      hole_for_potentiometer();
+    }
+    translate([(15 + 17.78), 0, (20 + 2 * 17.78)]){
+      hole_for_potentiometer();
+    }
+    translate([(15 + 17.78), 0, (20 + 3 * 17.78)]){
+      hole_for_potentiometer();
+    }
+    display_and_buttons();
   }
 }
 
@@ -57,11 +53,9 @@ include <front_panel_common.scad>
 
 difference() {
   // all the positive stuff
-  union() {
-    make_face_plate();
-    left_stiffening_rib();
-    right_stiffening_rib();
-  }
+  make_face_plate();
+
+  cutouts();
 
   // cutouts
   // add a second set of mounting slots if larger than 10hp

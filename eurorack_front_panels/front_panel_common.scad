@@ -96,3 +96,13 @@ module panel_label(label) {
   linear_extrude(height=3)
     text(label, 5, "Krungthep", halign="center" );
 }
+
+module make_face_plate() {
+  union() {
+    cube([x1, y2, z1], center=false);
+    if (Width_HP >= 10) {
+        right_stiffening_rib();
+    }
+    left_stiffening_rib();
+  }
+}

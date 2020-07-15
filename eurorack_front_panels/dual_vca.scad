@@ -14,35 +14,26 @@ Labels are inset into the face to be filled in with paint or marker.
 
 include <vca_common.scad>;
 
-module make_face_plate() {
-  difference() {
-    cube([x1, y2, z1], center=false);
-
-    union() {
-        for (i=[0:5]) {
-            translate([x1/2, 0, (15 + i * 12)]){
-                hole_for_jack();
-            }
-        }
-        for (i=[0:1]) {
-            translate([x1/2, 0, (90 + i * 15)]){
-                hole_for_potentiometer();
-            }
-        }
+module cutouts() {
+  union() {
+    for (i=[0:5]) {
+      translate([x1/2, 0, (15 + i * 12)]){
+        hole_for_jack();
+      }
+    }
+    for (i=[0:1]) {
+      translate([x1/2, 0, (90 + i * 15)]){
+        hole_for_potentiometer();
+      }
     }
   }
 }
 
 difference() {
   // all the positive stuff
-  union() {
-    make_face_plate();
-    if (Width_HP > 10) {
-        right_stiffening_rib();
-    }
-    left_stiffening_rib();
-    right_stiffening_rib();
-  }
+  make_face_plate();
+
+  cutouts();
 
   // cutouts
   // add a second set of mounting slots if larger than 10hp
