@@ -2,8 +2,6 @@
 
 // from https://www.blockscad3d.com/community/projects/718412
 
-
-
 module make_face_plate() {
   difference() {
     cube([x1, y2, z1], center=false);
@@ -31,17 +29,6 @@ module make_face_plate() {
         hole_for_potentiometer();
       }
       display_and_buttons();
-    }
-  }
-}
-
-module make_slot_pair() {
-  union(){
-    translate([0, 0, (z1 - z4)]){
-      make_slot();
-    }
-    translate([0, 0, z4]){
-      make_slot();
     }
   }
 }

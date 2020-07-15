@@ -14,27 +14,3 @@ module control_label(label, x, z) {
         text(label, 2, "Krungthep", halign="center", valign="center" );
 }
 
-module make_slot_pair() {
-  union(){
-    translate([0, 0, (z1 - z4)]){
-      make_slot();
-    }
-    translate([0, 0, z4]){
-      make_slot();
-    }
-  }
-}
-
-module make_right_slot_pair() {
-  translate([(x4 + 5.08 * (Width_HP - 4)), 0, 0]){
-    union(){
-      translate([0, 0, (z1 - z4)]){
-        make_slot();
-      }
-      translate([0, 0, z4]){
-        make_slot();
-      }
-    }
-  }
-}
-
