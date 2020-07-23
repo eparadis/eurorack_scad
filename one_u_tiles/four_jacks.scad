@@ -8,6 +8,7 @@ units: millimeters
 */
 
 use <blank_tile.scad>
+use <tile_common.scad>
 
 function inches( x) = x * 25.4; // convert inches to mm
 
@@ -15,24 +16,16 @@ module cutouts() {
     $fs=0.01; // make cylinder curves more fine
 
     // top-left jack
-    translate([inches(0.325), 0, inches(1.180)])
-        rotate([270,0,0])
-            cylinder(r=inches(0.245 / 2), h=10, center=true);
+    hole(x=inches(0.325), z=inches(1.180), d=inches(0.245));
 
     // top-right jack
-    translate([inches(0.875),0, inches(1.180)])
-        rotate([270,0,0])
-            cylinder(r=inches(0.245 / 2), h=10, center=true);
+    hole(x=inches(0.875), z=inches(1.180), d=inches(0.245));
     
     // bottom-left jack
-    translate([inches(0.325), 0, inches(0.520)])
-        rotate([270,0,0])
-            cylinder(r=inches(0.245 / 2), h=10, center=true);
+    hole(x=inches(0.325), z=inches(0.520), d=inches(0.245));
 
     // bottom-right jack
-    translate([inches(0.875),0, inches(0.520)])
-        rotate([270,0,0])
-            cylinder(r=inches(0.245 / 2), h=10, center=true);
+    hole(x=inches(0.875), z=inches(0.520), d=inches(0.245));
 }
 
 module one_pot_two_jacks() {
