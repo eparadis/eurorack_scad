@@ -10,8 +10,6 @@ units: millimeters
 use <blank_tile.scad>
 use <tile_common.scad>
 
-function inches( x) = x * 25.4; // convert inches to mm
-
 module cutouts() {
     $fs=0.01; // make cylinder curves more fine
 
