@@ -8,7 +8,7 @@ module front_face() {
 }
 
 rib_width = 2;
-rib_inset = 2.9;
+rib_inset = 2;
 rib_height = 25; // max physically measured at 29.06
 rib_depth = 8;
 module left_stiffening_rib() {
@@ -55,8 +55,11 @@ module mounting_holes() {
 module cutouts() {
     mounting_holes();
 }
-
-difference() {
-    material();
-    cutouts();
+module blank_tile() {
+    difference() {
+        material();
+        cutouts();
+    }
 }
+
+blank_tile();
