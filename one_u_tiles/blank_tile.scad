@@ -19,7 +19,7 @@ module front_face() {
 }
 
 rib_width = 2;
-rib_inset = 2;
+rib_inset = 1;
 rib_height = 25; // max physically measured at 29.06
 rib_depth = 8;
 module left_stiffening_rib() {
