@@ -9,11 +9,9 @@ units: millimeters
 
 use <tile_common.scad>;
 
-hp = 6; // width in hole points
 plate_height = inches(1.7); // spec is 1.7"
-plate_width = hp * 5.08 - 0.3; // general conversion factor with fudge for tolerance
 
-module front_face() {
+module front_face(plate_width) {
     thickness = 2; // thickness of PCB front panels
     cube([plate_width, thickness, plate_height], center=false);
 }
@@ -28,21 +26,21 @@ module left_stiffening_rib() {
     }
 }
 
-module right_stiffening_rib() {
+module right_stiffening_rib(plate_width) {
     translate([((plate_width - rib_width) - rib_inset), 0, ((plate_height - rib_height) / 2)]){
         cube([rib_width, rib_depth, rib_height], center=false);
     }
 }
 
-module material() {
+module material(plate_width) {
     union() {
-        front_face();
+        front_face(plate_width);
         left_stiffening_rib();
-        right_stiffening_rib();
+        right_stiffening_rib(plate_width);
     }
 }
 
-module mounting_holes() {
+module mounting_holes(plate_width) {
     // make round shapes more fine
     $fs = 0.1;
 
@@ -59,13 +57,16 @@ module mounting_holes() {
     hole_pair(plate_width - hole_horiz_offset);
 }
 
-module cutouts() {
-    mounting_holes();
+module cutouts(plate_width) {
+    mounting_holes(plate_width);
 }
-module blank_tile() {
+
+// hp is the width in eurorack 'hole positions'
+module blank_tile(hp = 6) {
+    plate_width = hp * 5.08 - 0.3; // general conversion factor with fudge for tolerance
     difference() {
-        material();
-        cutouts();
+        material(plate_width);
+        cutouts(plate_width);
     }
 }
 
