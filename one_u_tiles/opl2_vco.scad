@@ -38,12 +38,12 @@ module cutouts() {
     hole(x=right, z=(top+bottom)/2, d=inches(0.245));
 
     // screen: http://adafru.it/454
-    translate([left + 3 * inches(col_spacing), -1, (top+bottom)/2 - 19.9/2 ] ){
+    translate([left + 2.5 * inches(col_spacing), -1, (top+bottom)/2 - 19.9/2 ] ){
         cube([19.9, 4, 19.9]);
     }
 
     // encoder for menus
-    hole(x=left + 5 * inches(col_spacing), z=(top+bottom)/2, d=6.88);
+    hole(x=left + 4.3 * inches(col_spacing), z=(top+bottom)/2, d=6.88);
 }
 
 // example from https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Primitive_Solids
@@ -65,7 +65,7 @@ module snap(w){
 
 module display_snaps(){
     width = 10;
-    offset = left + 3 * inches(col_spacing) + 19.9/2 - width/2;
+    offset = left + 2.5 * inches(col_spacing) + 19.9/2 - width/2;
     translate([offset, 0, (top+bottom)/2 - 19.9/2 - 1]){
         snap(width);
     }
@@ -80,12 +80,12 @@ module display_snaps(){
 module encoder_collar(){
     $fs=0.01; // make cylinder curves more fine
     difference(){
-        translate([left + 5 * inches(col_spacing), 5, (top+bottom)/2]){
+        translate([left + 4.3 * inches(col_spacing), 5, (top+bottom)/2]){
             rotate([90,0,0]){
                 cylinder(10, 6, 6, center=true);
             }
         }
-        translate([left + 5 * inches(col_spacing), 6, (top+bottom)/2+3]){
+        translate([left + 4.3 * inches(col_spacing), 6, (top+bottom)/2+3]){
             cylinder(6, 1, 1, center=true);
         }
     }
@@ -95,7 +95,7 @@ module six_jacks() {
     union(){
         difference() {
             union(){
-                blank_tile(20);
+                blank_tile(16);
                 encoder_collar();
             }
             cutouts();
