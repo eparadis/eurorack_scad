@@ -32,22 +32,21 @@ module cutouts() {
     // bottom-center jack
     hole(x=center, z=bottom, d=inches(0.245));
 
-    // bottom-right jack
-    hole(x=right, z=bottom, d=inches(0.245));
+    // right-most jack
+    hole(x=right, z=(top+bottom)/2, d=inches(0.245));
 
     // screen: http://adafru.it/454
-    translate([left + 2.5 * inches(col_spacing), -1, (top+bottom)/2 - 19.9/2 ] ){
+    translate([left + 3 * inches(col_spacing), -1, (top+bottom)/2 - 19.9/2 ] ){
         cube([19.9, 4, 19.9]);
     }
 
-    // top-right jack
-    hole(x=right, z=top, d=6.88);
-
+    // encoder for menus
+    hole(x=left + 5 * inches(col_spacing), z=(top+bottom)/2, d=6.88);
 }
 
 module six_jacks() {
     difference() {
-        blank_tile(14);
+        blank_tile(20);
         cutouts();
     }
 }
