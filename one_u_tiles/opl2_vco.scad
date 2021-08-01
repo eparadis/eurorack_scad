@@ -9,14 +9,17 @@ units: millimeters
 use <blank_tile.scad>
 use <tile_common.scad>
 
+ // Columns
+ col_spacing = 0.585;
+ left = inches(0.4);
+// Rows
+top = inches(1.180);
+bottom = inches(0.520);
+
 module cutouts() {
     $fs=0.01; // make cylinder curves more fine
-    // Rows
-    top = inches(1.180);
-    bottom = inches(0.520);
-    // Columns
-    col_spacing = 0.585;
-    left = inches(0.4);
+
+
     center = left + inches(col_spacing);
     right = left + 2 * inches(col_spacing);
 
@@ -44,10 +47,44 @@ module cutouts() {
     hole(x=left + 5 * inches(col_spacing), z=(top+bottom)/2, d=6.88);
 }
 
+// example from https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Primitive_Solids
+module prism(l, w, h){
+       polyhedron(
+               points=[[0,0,0], [l,0,0], [l,w,0], [0,w,0], [0,w,h], [l,w,h]],
+               faces=[[0,1,2,3],[5,4,3,2],[0,4,5,1],[0,3,4],[5,2,1]]
+               );
+}
+
+module snap(w){
+    cube([w,9,1]);
+    translate([0,5+5.92,0]){
+        mirror([0,1,0]){
+            prism(w,3,2);
+        }
+    }
+}
+
+module display_snaps(){
+    width = 10;
+    offset = left + 3 * inches(col_spacing) + 19.9/2 - width/2;
+    translate([offset, 0, (top+bottom)/2 - 19.9/2 - 1]){
+        snap(width);
+    }
+
+    translate([offset , 0, (top+bottom)/2 + 19.9/2 + 1]){
+        mirror([0,0,1]){
+            snap(width);
+        }
+    }
+}
+
 module six_jacks() {
-    difference() {
-        blank_tile(20);
-        cutouts();
+    union(){
+        difference() {
+            blank_tile(20);
+            cutouts();
+        }
+        display_snaps();
     }
 }
 
