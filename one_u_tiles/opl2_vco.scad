@@ -19,7 +19,6 @@ bottom = inches(0.520);
 module cutouts() {
     $fs=0.01; // make cylinder curves more fine
 
-
     center = left + inches(col_spacing);
     right = left + 2 * inches(col_spacing);
 
@@ -78,13 +77,31 @@ module display_snaps(){
     }
 }
 
+module encoder_collar(){
+    $fs=0.01; // make cylinder curves more fine
+    difference(){
+        translate([left + 5 * inches(col_spacing), 5, (top+bottom)/2]){
+            rotate([90,0,0]){
+                cylinder(10, 6, 6, center=true);
+            }
+        }
+        translate([left + 5 * inches(col_spacing), 6, (top+bottom)/2+3]){
+            cylinder(6, 1, 1, center=true);
+        }
+    }
+}
+
 module six_jacks() {
     union(){
         difference() {
-            blank_tile(20);
+            union(){
+                blank_tile(20);
+                encoder_collar();
+            }
             cutouts();
         }
         display_snaps();
+        
     }
 }
 

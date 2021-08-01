@@ -8,5 +8,5 @@ function inches( x) = x * 25.4; // convert inches to mm
 module hole( x, z, d) {
     translate([x, 0, z])
         rotate([270,0,0])
-            cylinder(r=(d / 2), h=10, center=true);
+            cylinder(r=(d / 2), h=30, center=true);
 }
