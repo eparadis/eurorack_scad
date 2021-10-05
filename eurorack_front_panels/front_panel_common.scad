@@ -65,7 +65,7 @@ module make_slot_pair() {
 }
 
 module make_right_slot_pair() {
-  translate([(x4 + 5.08 * (Width_HP - 4)), 0, 0]){
+  translate([(x4 + 5.08 * (Width_HP - 5)), 0, 0]){
     union(){
       translate([0, 0, (z1 - z4)]){
         make_slot();
