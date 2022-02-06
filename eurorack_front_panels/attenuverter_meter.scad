@@ -7,6 +7,7 @@ Width_HP = 10;
 jack_dia = 5.85;
 pot_dia = 6.8;  // knob dia is 12.9
 switch_dia = 5.8; // 5.75 + .05 clr
+text_depth = 0.5;
 
 include <front_panel_common.scad>
 
@@ -47,6 +48,12 @@ module meter_snaps() {
 }
 
 module cutouts() {
+
+  translate([0, 0, -35])
+    panel_label("ATVTR");
+  translate([0, 0, -48])
+    panel_label("METER");
+
   // top meter
   translate([ x1/2 - 35.2/2, -0.1, 95]) {
     cube([35.2  , 4, 20.3 ]);
