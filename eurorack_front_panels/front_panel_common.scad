@@ -15,22 +15,29 @@ z4 = 3;   // distance to center of radius/slot from lower edge of front plate
 // make round shapes more fine
 $fs = 0.1;
 
-module hole_for_switch() {
-  hole_in_front_plate(switch_dia);
+module hole_for_switch(center=false) {
+  hole_in_front_plate(switch_dia, center);
 }
 
-module hole_for_potentiometer() {
-  hole_in_front_plate(pot_dia);
+module hole_for_potentiometer(center=false) {
+  hole_in_front_plate(pot_dia, center);
 }
 
-module hole_for_jack() {
-  hole_in_front_plate(jack_dia);
+module hole_for_jack(center=false) {
+  hole_in_front_plate(jack_dia, center);
 }
 
-module hole_in_front_plate(diameter) {
-  translate([0,-y2/2,0])
-  rotate([270, 0, 0]){
-    cylinder(r1=diameter/2, r2=diameter/2, h=y2*2, center=false);
+module hole_in_front_plate(diameter, center=false) {
+  if( center == true) {
+      translate([0,y2,0])
+    rotate([270, 0, 0])
+      cylinder(d=diameter, h=y2*2, center=true);
+      echo("centered");
+  } else {
+          translate([0,-y2 / 2,0])
+    rotate([270, 0, 0])
+      cylinder(d=diameter, h=y2*2, center=false);
+      echo("uncentered");
   }
 }
 

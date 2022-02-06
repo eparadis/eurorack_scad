@@ -4,9 +4,9 @@
 use <panel_common.scad>
 sigma = 0.01;
 Width_HP = 10;
-jack_dia = inches(0.245);
+jack_dia = 5.85;
 pot_dia = 6.8;  // knob dia is 12.9
-switch_dia = 4.75; // TODO this seems way too small. maybe it's a pushbutton?
+switch_dia = 5.8; // 5.75 + .05 clr
 
 include <front_panel_common.scad>
 
@@ -52,22 +52,33 @@ module cutouts() {
     cube([35.2  , 4, 20.3 ]);
   }
 
+  left_col = x1 / 3 - 3;
+  right_col = 2*x1 / 3 + 3;
+
   // left switch
-  translate( [x1/3 - switch_dia/2, -0.01, 60])
-    hole_for_switch();
+  translate( [left_col, -0.01, 60])
+    hole_for_switch(true);
 
   // left pot
-  translate( [x1/3 - pot_dia/2, -0.01, 40])
-    hole_for_potentiometer();
+  translate( [left_col, -0.01, 40])
+    hole_for_potentiometer(true);
 
   // left jack
-  translate( [x1/3 - jack_dia/2, -0.01, 20]) {
-    hole_for_jack();
+  translate( [left_col, -0.01, 20]) {
+    hole_for_jack(true);
   }
   
+  // right switch
+  translate( [right_col, -0.01, 60])
+    hole_for_switch(true);
+
+  // right pot
+  translate( [right_col, -0.01, 40])
+    hole_for_potentiometer(true);
+
   // right jack
-  translate( [2*x1/3 + jack_dia/2, -0.01, 20]) {
-    hole_for_jack();
+  translate( [right_col, -0.01, 20]) {
+    hole_for_jack(true);
   }
 }
 
@@ -91,13 +102,15 @@ difference() {
     }
     cutouts();
   }
-  echo("Final panel width: ", x1);
 }
 
 module volume_check() {
   color("green")
     translate([ x1/2 - 39.50/2, 2, 95-17])
       meter_volume();
+  // color("yellow")
+  //   translate([ x1/2 - 39.50/2, 2, 55-17])
+  //     meter_volume();
 }
 
 %volume_check();
