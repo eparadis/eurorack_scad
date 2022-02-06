@@ -10,8 +10,8 @@ difference() {
   make_face_plate();
 
   // cutouts
-  // add a second set of mounting slots if larger than 10hp
-  if (Width_HP <= 10) {
+  // add a second set of mounting slots if larger than 8hp
+  if (Width_HP <= 8 ) {
     make_slot_pair();
   } else {
     union(){
