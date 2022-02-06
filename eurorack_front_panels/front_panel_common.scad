@@ -101,7 +101,7 @@ module panel_label(label) {
   translate([0,text_depth,0])
   rotate([90, 0, 0])
   linear_extrude(height=3)
-    text(label, 5, "Krungthep", halign="center" );
+    text(label, 10, "Krungthep", halign="center" );
 }
 
 module make_face_plate() {
