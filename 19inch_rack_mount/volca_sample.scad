@@ -45,9 +45,13 @@ module rack_ear(num_U = 1) {
 
   difference() {
     cube([W, num_U*44.45, T]);
-    mounting_hole(6.35);
-    mounting_hole(6.35+15.875);
-    mounting_hole(6.35+31.75);
+    for(i=[0:num_U-1]) {
+      translate([0, i*44.45, 0]) {
+        mounting_hole(6.35);
+        mounting_hole(6.35+15.875);
+        mounting_hole(6.35+31.75);
+      }
+    }
     cube([W, clr/2, T]); // trim bottom for clearance
     translate([0, num_U*44.45-0.794/2, 0])
       cube([W, clr/2, T]);  // trim top for clearance
