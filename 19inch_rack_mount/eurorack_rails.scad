@@ -13,9 +13,9 @@ module eurorack_rail(length_hp=10) {
 
 module eurorack_rails(length_hp=10, size_1U=false) {
   eurorack_rail(length_hp);
-  translate([0, 122.5, 0]) {
+  translate([0, size_1U?37.186:122.5, 0]) { // pulp logic 1U format
     eurorack_rail(length_hp);
   }
 }
 
-eurorack_rails(10);
+eurorack_rails(10, size_1U=true);
