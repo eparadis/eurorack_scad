@@ -5,6 +5,10 @@ volca_height = 115;
 volca_width = 193;
 volca_depth = 45;  // is this the body only or does it include the knobs?
 
+module volca() {
+  cube([volca_width, volca_height, volca_depth]);
+}
+
 module side_clamp() {
   /*
     _______
@@ -55,18 +59,46 @@ module rack_ear(num_U = 1, right=false) {
       }
     }
     cube([W, clr/2, T]); // trim bottom for clearance
-    translate([0, num_U*44.45-0.794/2, 0])
+    translate([0, num_U*44.45-clr/2, 0])
       cube([W, clr/2, T]);  // trim top for clearance
   }
 }
 
+module demo() {
+  side_clamp();
 
-side_clamp();
-
-for(i=[1:4]) {
-  translate([(i-1)*60+30, 0, 0]) {
-    rack_ear(i);
-    translate([30,0,0]) rack_ear(i, right=true);
+  for(i=[1:4]) {
+    translate([(i-1)*60+30, 0, 0]) {
+      rack_ear(i);
+      translate([30,0,0]) rack_ear(i, right=true);
+    }
   }
 }
 
+module bracket() {
+  // left ear
+  translate([-15.875, 0, 0])
+    rack_ear(3);
+
+  // right ear
+  translate([15.875-20+450.85,0,0])
+    rack_ear(3, right=true);
+
+  // plate
+  clr = 0.794;
+  W = 450.85;
+  T = 3;
+  difference() {
+    cube([W, 44.45*3, T]);
+    cube([W, clr/2, T]); // bottom clearance
+    translate([0, 44.45*3-clr/2, 0])
+      cube([W, clr/2, T]);  // top clearance
+    translate([10, (44.45*3-volca_height)/2, -volca_depth/2 ]) volca();
+    translate([450.85-volca_width-10, (44.45*3-volca_height)/2, -volca_depth/2 ]) volca();
+  }
+
+}
+
+bracket();
+%translate([10, (44.45*3-volca_height)/2, -volca_depth/2 ]) volca();
+%translate([450.85-volca_width-10, (44.45*3-volca_height)/2, -volca_depth/2 ]) volca();
