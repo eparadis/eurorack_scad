@@ -102,3 +102,7 @@ module bracket() {
 bracket();
 %translate([10, (44.45*3-volca_height)/2, -volca_depth/2 ]) volca();
 %translate([450.85-volca_width-10, (44.45*3-volca_height)/2, -volca_depth/2 ]) volca();
+
+// how much space is in the middle? could we fit tiny eurorack rails?
+d = 450.85-2*volca_width-2*10;
+echo(str("distance between volcas = ", d, " mm (", d/5.08, " hp)"));
