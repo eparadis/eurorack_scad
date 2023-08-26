@@ -33,7 +33,7 @@ module side_clamp() {
     polygon(profile);
 }
 
-module rack_ear(num_U = 1) {
+module rack_ear(num_U = 1, right=false) {
   W = 20; // width of the ear. holes are offset from the left side
   T = 3;  // thickness of the ear. 3mm is pretty strong.
   clr = 0.794; // clearance for overall height of ear
@@ -43,6 +43,8 @@ module rack_ear(num_U = 1) {
       cylinder(d=7, h=10, $fn=64, center=true);
   }
 
+  translate([right?W:0, 0, 0])
+  scale([right?-1:1, 1, 1])
   difference() {
     cube([W, num_U*44.45, T]);
     for(i=[0:num_U-1]) {
@@ -62,7 +64,9 @@ module rack_ear(num_U = 1) {
 side_clamp();
 
 for(i=[1:4]) {
-  translate([i*30, 0, 0])
+  translate([(i-1)*60+30, 0, 0]) {
     rack_ear(i);
+    translate([30,0,0]) rack_ear(i, right=true);
+  }
 }
 
